@@ -1,48 +1,29 @@
-@import url('https://fonts.googleapis.com/css2?family=Anton&family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..700;1,6..96,400..700&family=Inter:wght@300;400;500;600;700&family=Oswald:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap');
-
-@font-face {
-  font-family: 'AntonLocal';
-  src: url('/fonts/anton-400.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'BodoniModaLocal';
-  src: url('/fonts/bodonimoda-400.woff2') format('woff2');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
-  --bg-black: #030305;
-  --bg-deep: #07070b;
-  --bg-surface: rgba(16, 16, 24, 0.72);
-  --bg-surface-hover: rgba(24, 24, 36, 0.88);
-  --border-dim: rgba(255, 255, 255, 0.08);
-  --border-bright: rgba(255, 255, 255, 0.22);
-  --border-neon: rgba(230, 57, 70, 0.45);
-  
-  --red-ember: #e63946;
-  --red-flare: #ff2a3a;
-  --orange-core: #ff6b35;
-  --gold-warm: #fca311;
-  --cyan-subtle: #4cc9f0;
-  
-  --text-primary: #f8fafc;
-  --text-secondary: #cbd5e1;
-  --text-muted: #808b96;
-  
-  --font-anton: 'AntonLocal', 'Anton', impact, sans-serif;
-  --font-serif: 'BodoniModaLocal', 'Bodoni Moda', 'Times New Roman', serif;
-  --font-oswald: 'Oswald', 'Arial Narrow', sans-serif;
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-mono: 'JetBrains Mono', monospace;
-  
-  --ease-cinematic: cubic-bezier(0.16, 1, 0.3, 1);
-  --ease-overshoot: cubic-bezier(0.14, 0.86, 0.22, 1.06);
+  --bg-canvas: #090A0F;
+  --bg-surface: #11131B;
+  --bg-surface-hover: #161924;
+  --bg-surface-subtle: rgba(17, 19, 27, 0.85);
+
+  --border-hairline: rgba(255, 255, 255, 0.08);
+  --border-hover: rgba(34, 211, 238, 0.4);
+  --border-active: rgba(34, 211, 238, 0.8);
+
+  --text-primary: #F1F5F9;
+  --text-secondary: #94A3B8;
+  --text-muted: #64748B;
+
+  --accent-cyan: #22D3EE;
+  --accent-cyan-hover: #67E8F9;
+  --accent-cyan-glow: rgba(34, 211, 238, 0.25);
+  --accent-cyan-subtle: rgba(34, 211, 238, 0.08);
+  --accent-emerald: #34D399;
+
+  --font-display: var(--font-display), 'Space Grotesk', system-ui, -apple-system, sans-serif;
+  --font-sans: var(--font-sans), 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-mono), 'JetBrains Mono', monospace;
+
+  --ease-smooth: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-spring: cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 *, *::before, *::after {
@@ -52,190 +33,145 @@
 }
 
 ::selection {
-  background: var(--red-ember);
-  color: #ffffff;
-  text-shadow: none;
+  background: rgba(34, 211, 238, 0.25);
+  color: #22D3EE;
 }
 
 html {
   scroll-behavior: smooth;
-  background-color: var(--bg-black);
+  background-color: var(--bg-canvas);
   color: var(--text-primary);
   font-family: var(--font-sans);
   overflow-x: clip;
 }
 
 body {
-  background-color: var(--bg-black);
+  background-color: var(--bg-canvas);
   color: var(--text-primary);
   min-height: 100vh;
   position: relative;
   overflow-x: clip;
   line-height: 1.6;
   -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
 }
 
-/* Typography Helpers */
-.title-huge {
-  font-family: var(--font-anton);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  line-height: 0.9;
-}
-
-.title-sub {
-  font-family: var(--font-oswald);
-  text-transform: uppercase;
-  letter-spacing: 0.12em;
-}
-
-.code-badge {
+/* Typography & Eyebrow Rules */
+.mono-eyebrow {
   font-family: var(--font-mono);
   font-size: 0.75rem;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--accent-cyan);
 }
 
-/* Distressed grunge texture styling from original */
-.tex-grunge {
-  background-image: url("/tex/grunge.png");
-  background-size: 260px;
-  background-blend-mode: multiply;
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
+.body-prose {
+  max-width: 65ch;
+  line-height: 1.6;
+  color: var(--text-secondary);
 }
 
-/* Glassmorphism Surface */
-.glass-panel {
+/* Obsidian Card Surface */
+.obsidian-card {
   background: var(--bg-surface);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid var(--border-dim);
+  border: 1px solid var(--border-hairline);
   border-radius: 10px;
-  transition: all 0.35s var(--ease-cinematic);
+  transition: all 0.3s var(--ease-smooth);
 }
 
-.glass-panel:hover {
+.obsidian-card:hover {
   background: var(--bg-surface-hover);
-  border-color: var(--border-neon);
-  box-shadow: 0 12px 32px -10px rgba(230, 57, 70, 0.25);
+  border-color: var(--border-hover);
+  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.7), 0 0 24px -6px var(--accent-cyan-subtle);
 }
 
-/* Red Ember Glow Button */
-.btn-ember {
+/* Primary Electric Cyan Button */
+.btn-cyan {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  padding: 0.75rem 1.6rem;
-  font-family: var(--font-oswald);
-  font-size: 0.95rem;
+  gap: 0.5rem;
+  padding: 0.7rem 1.4rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
   font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #fff;
-  background: linear-gradient(135deg, var(--red-ember) 0%, #aa1a26 100%);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  border-radius: 3px;
+  color: #090A0F;
+  background: var(--accent-cyan);
+  border: 1px solid transparent;
+  border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
-  box-shadow: 0 0 20px rgba(230, 57, 70, 0.4);
-  transition: all 0.3s var(--ease-cinematic);
-  position: relative;
-  overflow: hidden;
+  box-shadow: 0 2px 12px var(--accent-cyan-glow);
+  transition: all 0.25s var(--ease-smooth);
 }
 
-.btn-ember:hover {
+.btn-cyan:hover {
+  background: var(--accent-cyan-hover);
   transform: translateY(-2px);
-  box-shadow: 0 0 38px rgba(230, 57, 70, 0.75);
-  border-color: rgba(255, 255, 255, 0.6);
+  box-shadow: 0 4px 20px rgba(34, 211, 238, 0.4);
 }
 
+/* Secondary Obsidian Button */
 .btn-secondary {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.6rem;
-  padding: 0.75rem 1.5rem;
-  font-family: var(--font-oswald);
-  font-size: 0.95rem;
+  gap: 0.5rem;
+  padding: 0.7rem 1.35rem;
+  font-family: var(--font-sans);
+  font-size: 0.88rem;
   font-weight: 500;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
   color: var(--text-primary);
-  background: rgba(255, 255, 255, 0.05);
-  border: 1px solid var(--border-dim);
-  border-radius: 3px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-hairline);
+  border-radius: 6px;
   cursor: pointer;
   text-decoration: none;
   backdrop-filter: blur(8px);
-  transition: all 0.3s var(--ease-cinematic);
+  transition: all 0.25s var(--ease-smooth);
 }
 
 .btn-secondary:hover {
-  background: rgba(255, 255, 255, 0.12);
-  border-color: var(--border-bright);
-  transform: translateY(-2px);
+  background: rgba(255, 255, 255, 0.08);
+  border-color: var(--border-hover);
   color: #ffffff;
+  transform: translateY(-2px);
 }
 
-/* Chip styles from cinematic reference */
-.cinematic-chip {
+/* Status Pill with Emerald Available Dot */
+.status-pill {
   display: inline-flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.38rem 0.9rem;
-  background: rgba(14, 14, 20, 0.85);
-  border: 1px solid rgba(230, 57, 70, 0.45);
-  color: #f1f5f9;
+  gap: 0.5rem;
+  padding: 0.35rem 0.85rem;
+  background: rgba(52, 211, 153, 0.08);
+  border: 1px solid rgba(52, 211, 153, 0.25);
+  border-radius: 999px;
   font-family: var(--font-mono);
   font-size: 0.72rem;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  border-radius: 2px;
-  box-shadow: 0 0 14px rgba(230, 57, 70, 0.18);
+  color: var(--accent-emerald);
 }
 
-.cinematic-chip::before, .cinematic-chip::after {
-  content: '•';
-  color: var(--red-ember);
+.status-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--accent-emerald);
+  box-shadow: 0 0 8px var(--accent-emerald);
+  animation: pulseDot 2.2s infinite ease-in-out;
 }
 
-/* Corner bracket accents from original HUD */
-.bracket-box {
-  position: relative;
+@keyframes pulseDot {
+  0%, 100% { opacity: 0.55; transform: scale(0.9); }
+  50% { opacity: 1; transform: scale(1.15); box-shadow: 0 0 12px var(--accent-emerald); }
 }
 
-.bracket-box::before {
-  content: '';
-  position: absolute;
-  top: -4px;
-  left: -4px;
-  width: 12px;
-  height: 12px;
-  border-top: 2px solid var(--red-ember);
-  border-left: 2px solid var(--red-ember);
-  pointer-events: none;
-}
-
-.bracket-box::after {
-  content: '';
-  position: absolute;
-  bottom: -4px;
-  right: -4px;
-  width: 12px;
-  height: 12px;
-  border-bottom: 2px solid var(--red-ember);
-  border-right: 2px solid var(--red-ember);
-  pointer-events: none;
-}
-
-/* Section Container */
+/* Section Wrappers */
 .section-wrap {
-  max-width: 1320px;
+  max-width: 1240px;
   margin: 0 auto;
-  padding: 6.5rem 2rem;
+  padding: 6rem 2rem;
   position: relative;
   z-index: 10;
 }
@@ -246,28 +182,17 @@ body {
   }
 }
 
-/* Custom Scrollbar */
+/* Clean Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: var(--bg-black);
+  background: var(--bg-canvas);
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(230, 57, 70, 0.45);
+  background: rgba(255, 255, 255, 0.14);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--red-ember);
-}
-
-/* Keyframe animations */
-@keyframes pulseEmber {
-  0%, 100% { opacity: 0.6; transform: scale(1); }
-  50% { opacity: 1; transform: scale(1.08); }
-}
-
-@keyframes sweepScan {
-  0% { transform: translateY(-100%); }
-  100% { transform: translateY(1000%); }
+  background: var(--accent-cyan);
 }

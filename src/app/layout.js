@@ -1,16 +1,35 @@
+import { Space_Grotesk, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 
+const spaceGrotesk = Space_Grotesk({
+  subsets: ["latin"],
+  variable: "--font-display",
+  display: "swap",
+});
+
+const inter = Inter({
+  subsets: ["latin"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  variable: "--font-mono",
+  display: "swap",
+});
+
 export const viewport = {
-  themeColor: "#040406",
+  themeColor: "#090A0F",
   width: "device-width",
   initialScale: 1,
   viewportFit: "cover",
 };
 
 export const metadata = {
-  metadataBase: new URL("https://in.linkedin.com/in/sagar-wavare-33a815213"),
-  title: "Sagar Wavare — Full-Stack .NET Developer & Web Engineer",
-  description: "Portfolio of Sagar Wavare: 4+ years architecting enterprise .NET MVC & .NET Core web applications, high-throughput REST APIs, SQL Server optimization, and modern responsive frontends.",
+  metadataBase: new URL("https://sagar-portfolio-next.vercel.app"),
+  title: "Sagar Wavare — Full-Stack .NET Developer & API Engineer",
+  description: "Portfolio of Sagar Wavare: 4+ years architecting enterprise .NET Core and ASP.NET MVC web applications, high-throughput REST APIs, SQL Server optimization, and modern responsive frontends.",
   keywords: [
     "Sagar Wavare",
     ".NET Developer",
@@ -19,6 +38,7 @@ export const metadata = {
     "C#",
     "SQL Server",
     "RESTful API",
+    "Full-Stack Developer",
     "Next.js",
     "Web Developer",
     "Techiefleet Technologies",
@@ -29,9 +49,9 @@ export const metadata = {
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://in.linkedin.com/in/sagar-wavare-33a815213",
-    title: "Sagar Wavare — Full-Stack .NET Developer",
-    description: "4+ years crafting high-performance .NET applications, REST APIs, and modern web platforms.",
+    url: "https://sagar-portfolio-next.vercel.app",
+    title: "Sagar Wavare — Full-Stack .NET Developer & API Engineer",
+    description: "4+ years crafting high-performance .NET applications, REST APIs, and scalable web platforms.",
     siteName: "Sagar Wavare Portfolio",
     images: [
       {
@@ -49,8 +69,8 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
-      <body>{children}</body>
+    <html lang="en" className={`${spaceGrotesk.variable} ${inter.variable} ${jetbrainsMono.variable}`}>
+      <body className="antialiased">{children}</body>
     </html>
   );
 }

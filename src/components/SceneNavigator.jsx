@@ -4,10 +4,10 @@ import { useEffect, useState } from "react";
 
 const scenes = [
   { id: "hero", num: "01", label: "Hero" },
-  { id: "universe", num: "02", label: "Universe" },
-  { id: "timeline", num: "03", label: "Time Machine" },
-  { id: "projects", num: "04", label: "Projects" },
-  { id: "contact", num: "05", label: "Finale" },
+  { id: "universe", num: "02", label: "Stack" },
+  { id: "timeline", num: "03", label: "Experience" },
+  { id: "projects", num: "04", label: "Work" },
+  { id: "contact", num: "05", label: "Contact" },
 ];
 
 export default function SceneNavigator() {
@@ -15,11 +15,9 @@ export default function SceneNavigator() {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    // Show after initial scroll or short delay
-    const timer = setTimeout(() => setVisible(true), 1200);
+    const timer = setTimeout(() => setVisible(true), 800);
 
     const handleScroll = () => {
-      const scrollY = window.scrollY;
       const windowHeight = window.innerHeight;
 
       for (const scene of scenes) {
@@ -49,7 +47,7 @@ export default function SceneNavigator() {
   };
 
   return (
-    <aside className={`scene-rail ${visible ? "is-visible" : ""}`} aria-label="Scene Navigator">
+    <aside className={`scene-rail ${visible ? "is-visible" : ""}`} aria-label="Quick Section Navigation">
       <div className="rail-track">
         {scenes.map((s) => {
           const isActive = activeScene === s.id;
@@ -59,10 +57,9 @@ export default function SceneNavigator() {
               type="button"
               className={`rail-pip-btn ${isActive ? "is-active" : ""}`}
               onClick={() => scrollToScene(s.id)}
-              aria-label={`Jump to Scene ${s.num} ${s.label}`}
+              aria-label={`Jump to ${s.label}`}
             >
               <span className="pip-label">{s.label}</span>
-              <span className="pip-num">{s.num}</span>
               <span className="pip-dot" />
             </button>
           );
@@ -72,14 +69,14 @@ export default function SceneNavigator() {
       <style jsx>{`
         .scene-rail {
           position: fixed;
-          right: 2rem;
+          right: 1.75rem;
           top: 50%;
           transform: translateY(-50%) translateX(20px);
           z-index: 90;
           opacity: 0;
           pointer-events: none;
-          transition: opacity 0.6s cubic-bezier(0.16, 1, 0.3, 1),
-                      transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: opacity 0.5s var(--ease-smooth),
+                      transform 0.5s var(--ease-smooth);
         }
 
         .scene-rail.is-visible {
@@ -91,7 +88,7 @@ export default function SceneNavigator() {
         .rail-track {
           display: flex;
           flex-direction: column;
-          gap: 1.1rem;
+          gap: 1rem;
           position: relative;
         }
 
@@ -99,10 +96,10 @@ export default function SceneNavigator() {
           content: "";
           position: absolute;
           right: 3px;
-          top: 8px;
-          bottom: 8px;
+          top: 6px;
+          bottom: 6px;
           width: 1px;
-          background: rgba(255, 255, 255, 0.1);
+          background: rgba(255, 255, 255, 0.08);
           z-index: 1;
         }
 
@@ -118,17 +115,16 @@ export default function SceneNavigator() {
           cursor: pointer;
           padding: 4px 0;
           color: rgba(255, 255, 255, 0.4);
-          transition: all 0.25s ease;
+          transition: all 0.2s ease;
         }
 
         .pip-label {
-          font-family: var(--font-oswald);
-          font-size: 0.72rem;
-          letter-spacing: 0.14em;
-          text-transform: uppercase;
+          font-family: var(--font-sans);
+          font-size: 0.74rem;
+          font-weight: 500;
           opacity: 0;
           transform: translateX(6px);
-          transition: opacity 0.25s ease, transform 0.25s ease;
+          transition: opacity 0.2s ease, transform 0.2s ease;
           white-space: nowrap;
           color: #ffffff;
         }
@@ -138,37 +134,30 @@ export default function SceneNavigator() {
           transform: translateX(0);
         }
 
-        .pip-num {
-          font-family: var(--font-mono);
-          font-size: 0.68rem;
-          letter-spacing: 0.05em;
-          color: rgba(255, 255, 255, 0.4);
-          transition: color 0.25s ease;
-        }
-
         .pip-dot {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.3);
+          background: rgba(255, 255, 255, 0.25);
           border: 1px solid rgba(0, 0, 0, 0.8);
-          transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+          transition: all 0.25s var(--ease-smooth);
         }
 
         .rail-pip-btn:hover .pip-dot {
           background: #ffffff;
-          transform: scale(1.3);
+          transform: scale(1.25);
         }
 
-        .rail-pip-btn.is-active .pip-num {
-          color: var(--red-ember);
-          font-weight: 600;
+        .rail-pip-btn.is-active .pip-label {
+          opacity: 1;
+          transform: translateX(0);
+          color: var(--accent-cyan);
         }
 
         .rail-pip-btn.is-active .pip-dot {
-          background: var(--red-ember);
-          box-shadow: 0 0 10px var(--red-ember);
-          transform: scale(1.6);
+          background: var(--accent-cyan);
+          box-shadow: 0 0 10px var(--accent-cyan-glow);
+          transform: scale(1.5);
         }
 
         @media (max-width: 900px) {
@@ -180,4 +169,3 @@ export default function SceneNavigator() {
     </aside>
   );
 }
-

@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from "react";
 
 export default function CinematicPreloader({ onComplete }) {
   const [progress, setProgress] = useState(0);
-  const [statusText, setStatusText] = useState("INITIALIZING ARCHITECTURE...");
+  const [statusText, setStatusText] = useState("Initializing system architecture...");
   const [isDone, setIsDone] = useState(false);
   const [readyToEnter, setReadyToEnter] = useState(false);
 
@@ -13,34 +13,32 @@ export default function CinematicPreloader({ onComplete }) {
       if (prev) return prev;
       setTimeout(() => {
         onComplete?.();
-      }, 650);
+      }, 500);
       return true;
     });
   }, [onComplete]);
 
   useEffect(() => {
-    // Quick, high-tech initialization sequence
     const statuses = [
-      { at: 15, text: "CALIBRATING .NET RUNTIME..." },
-      { at: 40, text: "CONNECTING REST API ENDPOINTS..." },
-      { at: 70, text: "OPTIMIZING SQL ENGINE & STORED PROCEDURES..." },
-      { at: 92, text: "ENGAGING NEXT.JS INTERFACES..." },
-      { at: 100, text: "SYS.ONLINE // MMXXVI ARCHITECTURE READY" },
+      { at: 15, text: "Calibrating .NET Core runtime..." },
+      { at: 40, text: "Connecting REST API pipelines..." },
+      { at: 70, text: "Optimizing SQL Server stored procedures..." },
+      { at: 90, text: "Hydrating Next.js interfaces..." },
+      { at: 100, text: "System online · Obsidian & Electric Cyan architecture ready" },
     ];
 
     let current = 0;
     const interval = setInterval(() => {
-      current += Math.floor(Math.random() * 8) + 4;
+      current += Math.floor(Math.random() * 9) + 6;
       if (current >= 100) {
         current = 100;
         clearInterval(interval);
-        setStatusText("SYS.ONLINE // MMXXVI ARCHITECTURE READY");
+        setStatusText("System online · Architecture ready");
         setReadyToEnter(true);
 
-        // Auto transition after brief dramatic hold
         const autoTimer = setTimeout(() => {
           handleEnter();
-        }, 600);
+        }, 450);
 
         return () => clearTimeout(autoTimer);
       } else {
@@ -48,7 +46,7 @@ export default function CinematicPreloader({ onComplete }) {
         if (found) setStatusText(found.text);
         setProgress(current);
       }
-    }, 45);
+    }, 40);
 
     return () => clearInterval(interval);
   }, [handleEnter]);
@@ -56,13 +54,13 @@ export default function CinematicPreloader({ onComplete }) {
   return (
     <div className={`boot-curtain ${isDone ? "is-exiting" : ""}`} aria-live="polite">
       <div className="boot-container">
-        {/* Typographic Monogram */}
+        {/* Monogram */}
         <div className="boot-mark">
           <span className="boot-logo">SW</span>
           <span className="boot-year">MMXXVI</span>
         </div>
 
-        {/* Minimal Progress Bar from Original */}
+        {/* Electric Cyan Progress Bar */}
         <div className="boot-bar-wrap">
           <div className="boot-bar">
             <div className="boot-fill" style={{ width: `${progress}%` }} />
@@ -73,36 +71,32 @@ export default function CinematicPreloader({ onComplete }) {
         {/* Diagnostics Line */}
         <p className="boot-status">{statusText}</p>
 
-        {/* Fast Action Enter Button if user wants to click immediately */}
         {readyToEnter && (
           <button type="button" className="boot-enter-btn" onClick={handleEnter}>
-            <span>ENTER EXPERIENCE &rarr;</span>
+            <span>Enter Portfolio &rarr;</span>
           </button>
         )}
       </div>
-
-      {/* Background Micro Scanline */}
-      <div className="boot-scanline" />
 
       <style jsx>{`
         .boot-curtain {
           position: fixed;
           inset: 0;
           z-index: 99999;
-          background: #000000;
+          background: #090A0F;
           display: flex;
           align-items: center;
           justify-content: center;
-          transition: opacity 0.75s cubic-bezier(0.16, 1, 0.3, 1),
-                      transform 0.85s cubic-bezier(0.16, 1, 0.3, 1),
-                      visibility 0.75s;
+          transition: opacity 0.6s var(--ease-smooth),
+                      transform 0.6s var(--ease-smooth),
+                      visibility 0.6s;
         }
 
         .boot-curtain.is-exiting {
           opacity: 0;
           visibility: hidden;
           pointer-events: none;
-          transform: scale(1.04);
+          transform: scale(1.02);
         }
 
         .boot-container {
@@ -110,9 +104,9 @@ export default function CinematicPreloader({ onComplete }) {
           flex-direction: column;
           align-items: center;
           text-align: center;
-          gap: 1.5rem;
+          gap: 1.25rem;
           padding: 2rem;
-          max-width: 480px;
+          max-width: 440px;
           width: 90%;
         }
 
@@ -123,19 +117,19 @@ export default function CinematicPreloader({ onComplete }) {
         }
 
         .boot-logo {
-          font-family: var(--font-anton);
-          font-size: 3.2rem;
-          letter-spacing: 0.08em;
+          font-family: var(--font-display);
+          font-size: 2.8rem;
+          font-weight: 700;
+          letter-spacing: -0.02em;
           color: #ffffff;
           line-height: 1;
-          text-shadow: 0 0 25px rgba(230, 57, 70, 0.7);
         }
 
         .boot-year {
           font-family: var(--font-mono);
-          font-size: 0.75rem;
-          color: var(--red-ember);
-          letter-spacing: 0.2em;
+          font-size: 0.72rem;
+          color: var(--accent-cyan);
+          letter-spacing: 0.18em;
         }
 
         .boot-bar-wrap {
@@ -143,84 +137,58 @@ export default function CinematicPreloader({ onComplete }) {
           align-items: center;
           gap: 1rem;
           width: 100%;
-          max-width: 260px;
+          max-width: 240px;
         }
 
         .boot-bar {
           flex: 1;
           height: 2px;
-          background: rgba(255, 255, 255, 0.12);
+          background: rgba(255, 255, 255, 0.1);
           overflow: hidden;
           position: relative;
         }
 
         .boot-fill {
           height: 100%;
-          background: linear-gradient(90deg, var(--red-ember), #ffffff);
-          box-shadow: 0 0 12px var(--red-ember);
+          background: var(--accent-cyan);
+          box-shadow: 0 0 10px var(--accent-cyan-glow);
           transition: width 0.1s linear;
         }
 
         .boot-num {
           font-family: var(--font-mono);
-          font-size: 0.8rem;
-          color: #ffffff;
-          width: 42px;
+          font-size: 0.78rem;
+          color: var(--text-secondary);
+          width: 38px;
           text-align: right;
-          letter-spacing: 0.05em;
         }
 
         .boot-status {
           font-family: var(--font-mono);
           font-size: 0.72rem;
-          letter-spacing: 0.18em;
-          color: rgba(255, 255, 255, 0.45);
-          text-transform: uppercase;
+          color: var(--text-muted);
           margin: 0;
-          min-height: 1.4rem;
+          min-height: 1.2rem;
         }
 
         .boot-enter-btn {
           margin-top: 0.5rem;
-          padding: 0.6rem 1.4rem;
+          padding: 0.55rem 1.25rem;
           background: transparent;
-          border: 1px solid rgba(230, 57, 70, 0.6);
-          color: #ffffff;
-          font-family: var(--font-oswald);
-          font-size: 0.85rem;
-          letter-spacing: 0.16em;
-          text-transform: uppercase;
+          border: 1px solid var(--accent-cyan);
+          color: var(--accent-cyan);
+          font-family: var(--font-sans);
+          font-size: 0.84rem;
+          font-weight: 600;
           cursor: pointer;
-          border-radius: 2px;
-          transition: all 0.25s ease;
-          animation: enterGlow 1.5s infinite alternate;
+          border-radius: 4px;
+          transition: all 0.2s ease;
         }
 
         .boot-enter-btn:hover {
-          background: var(--red-ember);
-          border-color: var(--red-ember);
-          box-shadow: 0 0 25px rgba(230, 57, 70, 0.8);
-          transform: translateY(-2px);
-        }
-
-        @keyframes enterGlow {
-          from { box-shadow: 0 0 8px rgba(230, 57, 70, 0.2); }
-          to { box-shadow: 0 0 20px rgba(230, 57, 70, 0.7); }
-        }
-
-        .boot-scanline {
-          position: absolute;
-          inset: 0;
-          background: linear-gradient(
-            to bottom,
-            rgba(255, 255, 255, 0),
-            rgba(255, 255, 255, 0) 50%,
-            rgba(0, 0, 0, 0.4) 50%,
-            rgba(0, 0, 0, 0.4)
-          );
-          background-size: 100% 4px;
-          pointer-events: none;
-          opacity: 0.6;
+          background: var(--accent-cyan);
+          color: #090A0F;
+          box-shadow: 0 0 20px var(--accent-cyan-glow);
         }
       `}</style>
     </div>

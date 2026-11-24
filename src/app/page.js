@@ -18,42 +18,42 @@ export default function Home() {
 
   return (
     <main className="main-viewport">
-      {/* Cinematic Opening Preloader & Grand Reveal */}
+      {/* Cinematic Opening Preloader */}
       <CinematicPreloader onComplete={() => setIsBooted(true)} />
 
-      {/* Living Atmospheric Canvas (Grain, Sparks, Mouse Spotlight, Edge Cues) */}
+      {/* Atmospheric Canvas (Obsidian & Electric Cyan Particles & Mouse Spotlight) */}
       <CinematicAtmosphere />
 
-      {/* Floating Scene Navigator */}
+      {/* Floating Scene Rail Navigator */}
       <SceneNavigator />
 
-      {/* Primary Navigation Header */}
+      {/* Primary Sticky Header */}
       <Header onOpenResume={() => setResumeOpen(true)} />
 
-      {/* Scene 01: Typographic Wordmark & Hero Console */}
+      {/* Scene 01: Hero Section */}
       <HeroScene onOpenResume={() => setResumeOpen(true)} isBooted={isBooted} />
 
-      {/* Scene 02: The Technical Universe Matrix */}
+      {/* Scene 02: Technical Universe Matrix */}
       <UniverseScene />
 
-      {/* Scene 03: The Time Machine 2019-2026 */}
+      {/* Scene 03: Experience & Vertical Career Spine */}
       <TimeMachineScene />
 
-      {/* Scene 04: Production Deployments & Featured Projects */}
+      {/* Scene 04: Featured Production Projects */}
       <ProjectsScene />
 
-      {/* Scene 05: The Finale & Direct Transmission Connect */}
+      {/* Scene 05: Finale, Direct Contact & Footer */}
       <FinaleScene onOpenResume={() => setResumeOpen(true)} />
 
-      {/* Digital Resume Modal */}
+      {/* Full Resume Modal */}
       <ResumeModal isOpen={resumeOpen} onClose={() => setResumeOpen(false)} />
 
       <style jsx>{`
         .main-viewport {
           position: relative;
           min-height: 100vh;
-          background: #030305;
-          color: #f8fafc;
+          background: #090A0F;
+          color: #F1F5F9;
         }
       `}</style>
     </main>
