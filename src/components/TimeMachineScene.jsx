@@ -47,7 +47,7 @@ export default function TimeMachineScene() {
           </p>
         </div>
 
-        {/* Optional Filter Pills (defaults to All so all milestones are scannable immediately) */}
+        {/* Filter Pills */}
         <div className="year-filter-bar" role="tablist" aria-label="Filter timeline by year">
           <button
             type="button"
@@ -147,9 +147,10 @@ export default function TimeMachineScene() {
       <style jsx>{`
         .timeline-section {
           position: relative;
-          background: #090A0F;
+          background: var(--bg-canvas);
           border-top: 1px solid var(--border-hairline);
           border-bottom: 1px solid var(--border-hairline);
+          transition: background-color 0.25s var(--ease-smooth);
         }
 
         .section-header {
@@ -166,7 +167,7 @@ export default function TimeMachineScene() {
           font-size: clamp(2.2rem, 4.5vw, 3.6rem);
           font-weight: 700;
           letter-spacing: -0.02em;
-          color: #ffffff;
+          color: var(--text-heading);
           line-height: 1.1;
         }
 
@@ -186,7 +187,7 @@ export default function TimeMachineScene() {
 
         .filter-pill {
           padding: 0.45rem 1rem;
-          background: rgba(255, 255, 255, 0.03);
+          background: var(--bg-surface-subtle);
           border: 1px solid var(--border-hairline);
           border-radius: 999px;
           color: var(--text-secondary);
@@ -197,14 +198,14 @@ export default function TimeMachineScene() {
         }
 
         .filter-pill:hover {
-          background: rgba(255, 255, 255, 0.07);
-          color: #ffffff;
+          background: var(--bg-surface-subtle-hover);
+          color: var(--text-heading);
         }
 
         .filter-pill.is-active {
-          background: rgba(34, 211, 238, 0.12);
+          background: var(--accent-cyan-subtle);
           border-color: var(--accent-cyan);
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
         }
 
         /* Vertical Timeline Spine */
@@ -224,8 +225,8 @@ export default function TimeMachineScene() {
           background: linear-gradient(
             180deg,
             var(--accent-cyan) 0%,
-            rgba(34, 211, 238, 0.4) 50%,
-            rgba(255, 255, 255, 0.08) 100%
+            var(--accent-cyan-border) 50%,
+            var(--border-hairline) 100%
           );
         }
 
@@ -256,10 +257,10 @@ export default function TimeMachineScene() {
           width: 12px;
           height: 12px;
           border-radius: 50%;
-          background: #090A0F;
+          background: var(--bg-canvas);
           border: 2px solid var(--accent-cyan);
           box-shadow: 0 0 10px var(--accent-cyan-glow);
-          transition: transform 0.25s ease, background 0.25s ease;
+          transition: transform 0.25s ease, background-color 0.25s ease;
         }
 
         .timeline-item:hover .node-dot {
@@ -292,12 +293,12 @@ export default function TimeMachineScene() {
           font-family: var(--font-display);
           font-size: 1.35rem;
           font-weight: 700;
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           font-variant-numeric: tabular-nums;
         }
 
         .badge-sep {
-          color: var(--border-hairline);
+          color: var(--border-strong);
           font-size: 0.85rem;
         }
 
@@ -305,7 +306,7 @@ export default function TimeMachineScene() {
           font-family: var(--font-sans);
           font-size: 0.88rem;
           font-weight: 600;
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .milestone-sub {
@@ -341,21 +342,21 @@ export default function TimeMachineScene() {
           font-family: var(--font-mono);
           font-size: 0.72rem;
           padding: 0.25rem 0.65rem;
-          background: rgba(255, 255, 255, 0.04);
+          background: var(--bg-pill);
           border: 1px solid var(--border-hairline);
           border-radius: 4px;
           color: var(--text-muted);
         }
 
         .highlight-cyan {
-          background: rgba(34, 211, 238, 0.08);
-          border-color: rgba(34, 211, 238, 0.25);
-          color: var(--accent-cyan);
+          background: var(--accent-cyan-subtle);
+          border-color: var(--accent-cyan-border);
+          color: var(--accent-cyan-fg);
         }
 
         .highlight-emerald {
-          background: rgba(52, 211, 153, 0.08);
-          border-color: rgba(52, 211, 153, 0.25);
+          background: var(--accent-emerald-bg);
+          border-color: var(--accent-emerald-border);
           color: var(--accent-emerald);
         }
 

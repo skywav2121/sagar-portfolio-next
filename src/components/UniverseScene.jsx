@@ -63,7 +63,7 @@ export default function UniverseScene() {
           ))}
         </div>
 
-        {/* Uniform Skill Cards Grid (NO self-assigned grades) */}
+        {/* Uniform Skill Cards Grid */}
         <div className="skills-grid">
           {filteredSkills.map((skill, index) => (
             <div
@@ -120,9 +120,10 @@ export default function UniverseScene() {
       <style jsx>{`
         .universe-section {
           position: relative;
-          background: #090A0F;
+          background: var(--bg-canvas);
           border-top: 1px solid var(--border-hairline);
           border-bottom: 1px solid var(--border-hairline);
+          transition: background-color 0.25s var(--ease-smooth);
         }
 
         .section-header {
@@ -139,7 +140,7 @@ export default function UniverseScene() {
           font-size: clamp(2.2rem, 4.5vw, 3.6rem);
           font-weight: 700;
           letter-spacing: -0.02em;
-          color: #ffffff;
+          color: var(--text-heading);
           line-height: 1.1;
         }
 
@@ -159,7 +160,7 @@ export default function UniverseScene() {
 
         .cat-btn {
           padding: 0.55rem 1.2rem;
-          background: rgba(255, 255, 255, 0.03);
+          background: var(--bg-surface-subtle);
           border: 1px solid var(--border-hairline);
           border-radius: 6px;
           color: var(--text-secondary);
@@ -171,15 +172,15 @@ export default function UniverseScene() {
         }
 
         .cat-btn:hover {
-          background: rgba(255, 255, 255, 0.07);
-          color: #ffffff;
-          border-color: rgba(255, 255, 255, 0.2);
+          background: var(--bg-surface-subtle-hover);
+          color: var(--text-heading);
+          border-color: var(--border-strong);
         }
 
         .cat-btn.is-active {
-          background: rgba(34, 211, 238, 0.12);
+          background: var(--accent-cyan-subtle);
           border-color: var(--accent-cyan);
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
         }
 
         .skills-grid {
@@ -208,16 +209,16 @@ export default function UniverseScene() {
           font-family: var(--font-display);
           font-size: 1.15rem;
           font-weight: 600;
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .skill-years {
           font-family: var(--font-mono);
           font-size: 0.75rem;
           font-weight: 500;
-          color: var(--accent-cyan);
-          background: rgba(34, 211, 238, 0.08);
-          border: 1px solid rgba(34, 211, 238, 0.25);
+          color: var(--accent-cyan-fg);
+          background: var(--accent-cyan-subtle);
+          border: 1px solid var(--accent-cyan-border);
           padding: 0.2rem 0.55rem;
           border-radius: 4px;
         }
@@ -274,7 +275,7 @@ export default function UniverseScene() {
           font-family: var(--font-mono);
           font-size: 0.85rem;
           font-weight: 700;
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           letter-spacing: 0.1em;
         }
 
@@ -282,7 +283,7 @@ export default function UniverseScene() {
           font-family: var(--font-display);
           font-size: 1.15rem;
           font-weight: 600;
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .arch-text {

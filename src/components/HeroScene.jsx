@@ -177,6 +177,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
                   rel="noopener noreferrer"
                   className="social-btn"
                   title="Connect on LinkedIn"
+                  aria-label="LinkedIn"
                 >
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.46 10.9v8.37H9.2V10.9H6.46M7.83 6.45a1.65 1.65 0 0 0-1.66 1.66 1.66 1.66 0 0 0 1.66 1.66 1.66 1.66 0 0 0 1.66-1.66Z"/>
@@ -186,6 +187,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
                   href={`mailto:${portfolioData.personal.email}`}
                   className="social-btn"
                   title="Send Direct Email"
+                  aria-label="Send Direct Email"
                 >
                   <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                     <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
@@ -206,8 +208,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           align-items: center;
           justify-content: center;
           padding: 8rem 2rem 5rem;
-          background: radial-gradient(circle at 50% 15%, rgba(34, 211, 238, 0.05) 0%, transparent 65%),
-                      radial-gradient(circle at 80% 80%, rgba(17, 19, 27, 0.7) 0%, transparent 50%);
+          background: var(--hero-gradient);
           overflow: hidden;
         }
 
@@ -225,7 +226,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           font-family: var(--font-mono);
           font-size: 0.72rem;
           letter-spacing: 0.16em;
-          color: rgba(255, 255, 255, 0.3);
+          color: var(--text-decor);
         }
 
         .hero-container {
@@ -269,19 +270,19 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           font-weight: 700;
           letter-spacing: -0.025em;
           line-height: 1.05;
-          color: #ffffff;
+          color: var(--text-heading);
           margin-bottom: 0.75rem;
         }
 
         .title-last {
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .hero-role {
           font-family: var(--font-sans);
           font-size: clamp(1.05rem, 1.8vw, 1.3rem);
           font-weight: 500;
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           display: flex;
           flex-wrap: wrap;
           align-items: center;
@@ -289,7 +290,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
         }
 
         .role-sep {
-          color: rgba(255, 255, 255, 0.25);
+          color: var(--border-strong);
         }
 
         .role-exp {
@@ -353,7 +354,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           font-size: 1.7rem;
           font-weight: 700;
           font-variant-numeric: tabular-nums;
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           line-height: 1.1;
         }
 
@@ -378,7 +379,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           flex-direction: column;
           justify-content: space-between;
           transform-style: preserve-3d;
-          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
         }
 
         .portrait-image-wrap {
@@ -387,7 +388,8 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           overflow: hidden;
           width: 100%;
           height: 380px;
-          background: #090A0F;
+          background: var(--bg-canvas);
+          border: 1px solid var(--border-hairline);
         }
 
         :global(.portrait-img) {
@@ -395,7 +397,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           height: 100%;
           object-fit: cover;
           object-position: center 20%;
-          filter: contrast(1.05) brightness(0.98);
+          filter: contrast(1.04) brightness(0.98);
           transition: transform 0.5s var(--ease-smooth);
         }
 
@@ -406,7 +408,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
         .portrait-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, transparent 65%, rgba(9, 10, 15, 0.9) 100%);
+          background: linear-gradient(180deg, transparent 68%, rgba(9, 10, 15, 0.55) 100%);
           pointer-events: none;
         }
 
@@ -428,7 +430,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           font-family: var(--font-display);
           font-size: 1.05rem;
           font-weight: 600;
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .meta-sub {
@@ -448,7 +450,7 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
           display: flex;
           align-items: center;
           justify-content: center;
-          background: rgba(255, 255, 255, 0.04);
+          background: var(--bg-pill);
           border: 1px solid var(--border-hairline);
           border-radius: 6px;
           color: var(--text-secondary);
@@ -457,9 +459,9 @@ export default function HeroScene({ onOpenResume, isBooted = true }) {
         }
 
         .social-btn:hover {
-          background: rgba(34, 211, 238, 0.12);
+          background: var(--accent-cyan-subtle);
           border-color: var(--accent-cyan);
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           transform: translateY(-2px);
         }
 

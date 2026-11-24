@@ -21,13 +21,13 @@ export default function Home() {
       {/* Cinematic Opening Preloader */}
       <CinematicPreloader onComplete={() => setIsBooted(true)} />
 
-      {/* Atmospheric Canvas (Obsidian & Electric Cyan Particles & Mouse Spotlight) */}
+      {/* Atmospheric Canvas (Adaptive Dark/Light Particles & Mouse Spotlight) */}
       <CinematicAtmosphere />
 
       {/* Floating Scene Rail Navigator */}
       <SceneNavigator />
 
-      {/* Primary Sticky Header */}
+      {/* Primary Sticky Header with Theme Switch */}
       <Header onOpenResume={() => setResumeOpen(true)} />
 
       {/* Scene 01: Hero Section */}
@@ -52,8 +52,9 @@ export default function Home() {
         .main-viewport {
           position: relative;
           min-height: 100vh;
-          background: #090A0F;
-          color: #F1F5F9;
+          background: var(--bg-canvas);
+          color: var(--text-primary);
+          transition: background-color 0.25s var(--ease-smooth), color 0.25s var(--ease-smooth);
         }
       `}</style>
     </main>

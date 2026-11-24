@@ -2,11 +2,14 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import { portfolioData } from "@/data/portfolio";
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function Header({ onOpenResume }) {
   const [scrolled, setScrolled] = useState(false);
   const [menuOpen, setMenuOpen] = useState(false);
+  const { theme, toggleTheme } = useTheme();
+
+  const isLight = theme === "light";
 
   useEffect(() => {
     const handleScroll = () => {
@@ -22,7 +25,7 @@ export default function Header({ onOpenResume }) {
         {/* Brand Mark */}
         <Link href="#hero" className="brand-logo" onClick={() => setMenuOpen(false)}>
           <span className="brand-name">Sagar Wavare</span>
-          <span className="brand-dot">•</span>
+          <span className="brand-dot" aria-hidden="true">•</span>
           <span className="brand-role">Full-Stack .NET</span>
         </Link>
 
@@ -34,14 +37,40 @@ export default function Header({ onOpenResume }) {
           <a href="#contact" className="nav-link">Contact</a>
         </nav>
 
-        {/* Right Actions: Availability Badge + High-Contrast Resume CTA */}
+        {/* Right Actions: Availability Badge, Theme Switch, Resume CTA */}
         <div className="header-actions">
           <div className="status-pill" title="Available for roles">
             <span className="status-dot"></span>
             <span className="status-text">Available for roles</span>
           </div>
 
-          <button 
+          {/* Dark / Light Theme Switch */}
+          <button
+            type="button"
+            role="switch"
+            aria-checked={isLight}
+            aria-label={isLight ? "Switch to dark theme" : "Switch to light theme"}
+            title={isLight ? "Switch to dark theme" : "Switch to light theme"}
+            className={`theme-switch ${isLight ? "is-light" : "is-dark"}`}
+            onClick={toggleTheme}
+          >
+            <span className="switch-track">
+              <span className="switch-icon switch-icon--moon" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+                </svg>
+              </span>
+              <span className="switch-icon switch-icon--sun" aria-hidden="true">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="4" />
+                  <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41" />
+                </svg>
+              </span>
+              <span className="switch-thumb" aria-hidden="true" />
+            </span>
+          </button>
+
+          <button
             type="button"
             className="btn-cyan btn-resume"
             onClick={onOpenResume}
@@ -74,7 +103,19 @@ export default function Header({ onOpenResume }) {
           <a href="#timeline" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Experience</a>
           <a href="#universe" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Stack</a>
           <a href="#contact" className="mobile-nav-link" onClick={() => setMenuOpen(false)}>Contact</a>
-          
+
+          <div className="mobile-theme-row">
+            <span className="mobile-theme-label">Appearance</span>
+            <button
+              type="button"
+              className="btn-secondary mobile-theme-btn"
+              onClick={toggleTheme}
+            >
+              <span>{isLight ? "Light Mode" : "Dark Mode"}</span>
+              <span aria-hidden="true">{isLight ? "☀" : "☾"}</span>
+            </button>
+          </div>
+
           <button
             type="button"
             className="btn-cyan mobile-resume-btn"
@@ -95,18 +136,18 @@ export default function Header({ onOpenResume }) {
           left: 0;
           right: 0;
           z-index: 100;
-          padding: 1.15rem 2rem;
-          background: rgba(9, 10, 15, 0.75);
+          padding: 1.1rem 2rem;
+          background: var(--bg-header);
           backdrop-filter: blur(14px);
           -webkit-backdrop-filter: blur(14px);
-          border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+          border-bottom: 1px solid var(--border-hairline);
           transition: all 0.3s var(--ease-smooth);
         }
 
         .header.is-scrolled {
           padding: 0.85rem 2rem;
-          background: rgba(9, 10, 15, 0.9);
-          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+          background: var(--bg-header-scrolled);
+          box-shadow: 0 10px 30px rgba(0, 0, 0, 0.12);
         }
 
         .header-container {
@@ -115,6 +156,7 @@ export default function Header({ onOpenResume }) {
           display: flex;
           align-items: center;
           justify-content: space-between;
+          gap: 1rem;
         }
 
         .brand-logo {
@@ -128,12 +170,12 @@ export default function Header({ onOpenResume }) {
           font-family: var(--font-display);
           font-size: 1.15rem;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--text-heading);
           letter-spacing: -0.01em;
         }
 
         .brand-dot {
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           font-size: 0.85rem;
         }
 
@@ -162,7 +204,7 @@ export default function Header({ onOpenResume }) {
         }
 
         .nav-link:hover {
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .nav-link::after {
@@ -183,7 +225,80 @@ export default function Header({ onOpenResume }) {
         .header-actions {
           display: flex;
           align-items: center;
-          gap: 1.25rem;
+          gap: 0.85rem;
+        }
+
+        /* Theme Toggle Switch */
+        .theme-switch {
+          position: relative;
+          display: inline-flex;
+          align-items: center;
+          padding: 0;
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          border-radius: 999px;
+          outline: none;
+        }
+
+        .theme-switch:focus-visible .switch-track {
+          outline: 2px solid var(--accent-cyan);
+          outline-offset: 2px;
+        }
+
+        .switch-track {
+          position: relative;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 58px;
+          height: 30px;
+          padding: 0 7px;
+          background: var(--bg-pill);
+          border: 1px solid var(--border-hairline);
+          border-radius: 999px;
+          transition: border-color 0.25s ease, background-color 0.25s ease;
+        }
+
+        .theme-switch:hover .switch-track {
+          border-color: var(--border-hover);
+          background: var(--bg-pill-hover);
+        }
+
+        .switch-icon {
+          position: relative;
+          z-index: 2;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: var(--text-muted);
+          transition: color 0.25s ease, transform 0.25s ease;
+        }
+
+        .theme-switch.is-dark .switch-icon--moon {
+          color: var(--accent-cyan-fg);
+        }
+
+        .theme-switch.is-light .switch-icon--sun {
+          color: var(--accent-cyan-fg);
+        }
+
+        .switch-thumb {
+          position: absolute;
+          top: 3px;
+          left: 3px;
+          width: 22px;
+          height: 22px;
+          border-radius: 50%;
+          background: var(--bg-surface);
+          border: 1px solid var(--accent-cyan-border);
+          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);
+          transition: transform 0.28s var(--ease-smooth), background-color 0.25s ease;
+          z-index: 1;
+        }
+
+        .theme-switch.is-light .switch-thumb {
+          transform: translateX(28px);
         }
 
         .btn-resume {
@@ -199,7 +314,7 @@ export default function Header({ onOpenResume }) {
           gap: 5px;
           width: 36px;
           height: 36px;
-          background: rgba(255, 255, 255, 0.04);
+          background: var(--bg-pill);
           border: 1px solid var(--border-hairline);
           border-radius: 6px;
           cursor: pointer;
@@ -209,7 +324,7 @@ export default function Header({ onOpenResume }) {
         .burger-line {
           width: 100%;
           height: 2px;
-          background: #ffffff;
+          background: var(--text-heading);
           transition: all 0.25s ease;
         }
 
@@ -224,13 +339,13 @@ export default function Header({ onOpenResume }) {
         .mobile-menu {
           display: none;
           position: fixed;
-          top: 65px;
+          top: 63px;
           left: 0;
           right: 0;
-          background: rgba(9, 10, 15, 0.98);
+          background: var(--bg-mobile-menu);
           backdrop-filter: blur(20px);
           border-bottom: 1px solid var(--border-hairline);
-          padding: 2rem 1.5rem;
+          padding: 1.75rem 1.5rem 2rem;
           z-index: 99;
           transform: translateY(-10px);
           opacity: 0;
@@ -247,29 +362,57 @@ export default function Header({ onOpenResume }) {
         .mobile-nav {
           display: flex;
           flex-direction: column;
-          gap: 1.25rem;
+          gap: 1.1rem;
         }
 
         .mobile-nav-link {
           font-family: var(--font-display);
-          font-size: 1.25rem;
+          font-size: 1.2rem;
           font-weight: 600;
           color: var(--text-primary);
           text-decoration: none;
-          padding-bottom: 0.75rem;
+          padding-bottom: 0.7rem;
           border-bottom: 1px solid var(--border-hairline);
         }
 
+        .mobile-theme-row {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding: 0.25rem 0;
+        }
+
+        .mobile-theme-label {
+          font-family: var(--font-sans);
+          font-size: 0.92rem;
+          font-weight: 500;
+          color: var(--text-secondary);
+        }
+
+        .mobile-theme-btn {
+          padding: 0.45rem 0.9rem;
+          font-size: 0.84rem;
+        }
+
         .mobile-resume-btn {
-          margin-top: 1rem;
+          margin-top: 0.5rem;
           width: 100%;
           padding: 0.85rem;
           justify-content: center;
         }
 
-        @media (max-width: 900px) {
+        @media (max-width: 1024px) {
           .brand-role {
             display: none;
+          }
+          .status-pill {
+            display: none;
+          }
+        }
+
+        @media (max-width: 820px) {
+          .header {
+            padding: 0.95rem 1.25rem;
           }
           .desktop-nav {
             display: none;
@@ -279,12 +422,6 @@ export default function Header({ onOpenResume }) {
           }
           .mobile-menu {
             display: block;
-          }
-        }
-
-        @media (max-width: 600px) {
-          .status-pill {
-            display: none;
           }
         }
       `}</style>

@@ -99,7 +99,7 @@ export default function SceneNavigator() {
           top: 6px;
           bottom: 6px;
           width: 1px;
-          background: rgba(255, 255, 255, 0.08);
+          background: var(--border-hairline);
           z-index: 1;
         }
 
@@ -114,7 +114,7 @@ export default function SceneNavigator() {
           border: none;
           cursor: pointer;
           padding: 4px 0;
-          color: rgba(255, 255, 255, 0.4);
+          color: var(--text-muted);
           transition: all 0.2s ease;
         }
 
@@ -126,7 +126,7 @@ export default function SceneNavigator() {
           transform: translateX(6px);
           transition: opacity 0.2s ease, transform 0.2s ease;
           white-space: nowrap;
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .rail-pip-btn:hover .pip-label {
@@ -138,20 +138,20 @@ export default function SceneNavigator() {
           width: 7px;
           height: 7px;
           border-radius: 50%;
-          background: rgba(255, 255, 255, 0.25);
-          border: 1px solid rgba(0, 0, 0, 0.8);
+          background: var(--border-strong);
+          border: 1px solid var(--bg-canvas);
           transition: all 0.25s var(--ease-smooth);
         }
 
         .rail-pip-btn:hover .pip-dot {
-          background: #ffffff;
+          background: var(--text-heading);
           transform: scale(1.25);
         }
 
         .rail-pip-btn.is-active .pip-label {
           opacity: 1;
           transform: translateX(0);
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
         }
 
         .rail-pip-btn.is-active .pip-dot {

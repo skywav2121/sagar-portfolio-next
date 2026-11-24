@@ -199,7 +199,7 @@ export default function ResumeModal({ isOpen, onClose }) {
         .modal-backdrop {
           position: fixed;
           inset: 0;
-          background: rgba(9, 10, 15, 0.88);
+          background: rgba(9, 10, 15, 0.72);
           backdrop-filter: blur(12px);
           -webkit-backdrop-filter: blur(12px);
           z-index: 1000;

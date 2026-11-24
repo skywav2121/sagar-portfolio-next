@@ -64,7 +64,7 @@ export default function ProjectsScene() {
                 <div className="impact-badge">{proj.impactBadge}</div>
               </div>
 
-              {/* Outcome-Driven Card Body with Flex Column Justify Between */}
+              {/* Outcome-Driven Card Body */}
               <div className="project-body">
                 <div className="project-header">
                   <div className="title-group">
@@ -94,14 +94,12 @@ export default function ProjectsScene() {
 
                 {/* Bottom Section Pushed to Bottom to Keep Alignment */}
                 <div className="project-bottom">
-                  {/* Tech Badges */}
                   <div className="tech-badge-row">
                     {proj.tech.map((t) => (
                       <span key={t} className="tech-badge">{t}</span>
                     ))}
                   </div>
 
-                  {/* Footer Action Row */}
                   <div className="project-footer">
                     <div className="project-metric">
                       <span className="metric-lbl">{proj.stats.label}</span>
@@ -131,9 +129,10 @@ export default function ProjectsScene() {
       <style jsx>{`
         .projects-section {
           position: relative;
-          background: #090A0F;
+          background: var(--bg-canvas);
           border-top: 1px solid var(--border-hairline);
           border-bottom: 1px solid var(--border-hairline);
+          transition: background-color 0.25s var(--ease-smooth);
         }
 
         .section-header {
@@ -150,7 +149,7 @@ export default function ProjectsScene() {
           font-size: clamp(2.2rem, 4.5vw, 3.6rem);
           font-weight: 700;
           letter-spacing: -0.02em;
-          color: #ffffff;
+          color: var(--text-heading);
           line-height: 1.1;
         }
 
@@ -160,7 +159,6 @@ export default function ProjectsScene() {
           text-align: center;
         }
 
-        /* Equal-Height 2-Column Grid */
         .projects-grid {
           display: grid;
           grid-template-columns: repeat(2, 1fr);
@@ -182,7 +180,8 @@ export default function ProjectsScene() {
           width: 100%;
           aspect-ratio: 16 / 9;
           overflow: hidden;
-          background: #090A0F;
+          background: var(--bg-surface-subtle);
+          border-bottom: 1px solid var(--border-hairline);
         }
 
         :global(.project-img) {
@@ -200,7 +199,7 @@ export default function ProjectsScene() {
         .image-overlay {
           position: absolute;
           inset: 0;
-          background: linear-gradient(180deg, rgba(9, 10, 15, 0.2) 0%, rgba(9, 10, 15, 0.75) 100%);
+          background: linear-gradient(180deg, rgba(9, 10, 15, 0.12) 0%, rgba(9, 10, 15, 0.55) 100%);
           pointer-events: none;
         }
 
@@ -209,10 +208,10 @@ export default function ProjectsScene() {
           top: 1rem;
           left: 1rem;
           padding: 0.3rem 0.65rem;
-          background: rgba(9, 10, 15, 0.85);
+          background: rgba(9, 10, 15, 0.82);
           backdrop-filter: blur(8px);
-          border: 1px solid var(--border-hairline);
-          color: var(--text-secondary);
+          border: 1px solid rgba(255, 255, 255, 0.14);
+          color: #F1F5F9;
           font-family: var(--font-mono);
           font-size: 0.7rem;
           border-radius: 4px;
@@ -223,10 +222,10 @@ export default function ProjectsScene() {
           top: 1rem;
           right: 1rem;
           padding: 0.3rem 0.75rem;
-          background: rgba(34, 211, 238, 0.12);
+          background: rgba(9, 10, 15, 0.85);
           backdrop-filter: blur(8px);
-          border: 1px solid rgba(34, 211, 238, 0.35);
-          color: var(--accent-cyan);
+          border: 1px solid rgba(34, 211, 238, 0.4);
+          color: #22D3EE;
           font-family: var(--font-mono);
           font-size: 0.7rem;
           font-weight: 600;
@@ -258,13 +257,13 @@ export default function ProjectsScene() {
           font-family: var(--font-display);
           font-size: 1.45rem;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--text-heading);
           letter-spacing: -0.01em;
         }
 
         .project-tagline {
           font-size: 0.86rem;
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           font-weight: 500;
         }
 
@@ -272,10 +271,9 @@ export default function ProjectsScene() {
           font-family: var(--font-mono);
           font-size: 1.1rem;
           font-weight: 600;
-          color: rgba(255, 255, 255, 0.15);
+          color: var(--text-faint);
         }
 
-        /* Outcome-Driven Sections */
         .project-details {
           display: flex;
           flex-direction: column;
@@ -292,7 +290,7 @@ export default function ProjectsScene() {
         .detail-label {
           font-family: var(--font-mono);
           font-size: 0.72rem;
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           text-transform: uppercase;
           letter-spacing: 0.05em;
         }
@@ -318,7 +316,7 @@ export default function ProjectsScene() {
 
         .tech-badge {
           padding: 0.25rem 0.6rem;
-          background: rgba(255, 255, 255, 0.03);
+          background: var(--bg-surface-subtle);
           border: 1px solid var(--border-hairline);
           border-radius: 4px;
           font-family: var(--font-mono);
@@ -349,7 +347,7 @@ export default function ProjectsScene() {
           font-family: var(--font-sans);
           font-size: 0.92rem;
           font-weight: 600;
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .btn-visit {

@@ -70,7 +70,7 @@ export default function FinaleScene({ onOpenResume }) {
 
         {/* Contact and Transmission Hub */}
         <div className="contact-hub-grid">
-          {/* Direct Details Card with Privacy Cleanup */}
+          {/* Direct Details Card */}
           <div className="obsidian-card contact-card">
             <div>
               <span className="mono-eyebrow">DIRECT CONTACT</span>
@@ -106,7 +106,7 @@ export default function FinaleScene({ onOpenResume }) {
                 </button>
               </div>
 
-              {/* Location (Privacy Sanitized to Palghar / Mumbai, India) */}
+              {/* Location */}
               <div className="contact-item">
                 <div className="item-icon" aria-hidden="true">
                   <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -264,9 +264,10 @@ export default function FinaleScene({ onOpenResume }) {
       <style jsx>{`
         .finale-section {
           position: relative;
-          background: #090A0F;
+          background: var(--bg-canvas);
           border-top: 1px solid var(--border-hairline);
           padding-top: 5rem;
+          transition: background-color 0.25s var(--ease-smooth);
         }
 
         .finale-quote-block {
@@ -283,7 +284,7 @@ export default function FinaleScene({ onOpenResume }) {
           font-size: clamp(2.2rem, 5vw, 4rem);
           font-weight: 700;
           letter-spacing: -0.02em;
-          color: #ffffff;
+          color: var(--text-heading);
           line-height: 1.15;
         }
 
@@ -312,7 +313,7 @@ export default function FinaleScene({ onOpenResume }) {
           font-family: var(--font-display);
           font-size: 1.5rem;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--text-heading);
           margin-top: 0.35rem;
           margin-bottom: 0.65rem;
         }
@@ -336,7 +337,7 @@ export default function FinaleScene({ onOpenResume }) {
           align-items: center;
           gap: 0.85rem;
           padding: 0.85rem 1rem;
-          background: rgba(255, 255, 255, 0.02);
+          background: var(--bg-surface-subtle);
           border: 1px solid var(--border-hairline);
           border-radius: 6px;
         }
@@ -348,9 +349,9 @@ export default function FinaleScene({ onOpenResume }) {
           align-items: center;
           justify-content: center;
           border-radius: 6px;
-          background: rgba(34, 211, 238, 0.08);
-          border: 1px solid rgba(34, 211, 238, 0.2);
-          color: var(--accent-cyan);
+          background: var(--accent-cyan-subtle);
+          border: 1px solid var(--accent-cyan-border);
+          color: var(--accent-cyan-fg);
           flex-shrink: 0;
         }
 
@@ -374,12 +375,12 @@ export default function FinaleScene({ onOpenResume }) {
         }
 
         .item-link {
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
         }
 
         .copy-btn {
           padding: 0.35rem 0.75rem;
-          background: rgba(255, 255, 255, 0.04);
+          background: var(--bg-pill);
           border: 1px solid var(--border-hairline);
           color: var(--text-secondary);
           font-family: var(--font-mono);
@@ -390,9 +391,9 @@ export default function FinaleScene({ onOpenResume }) {
         }
 
         .copy-btn:hover {
-          background: rgba(34, 211, 238, 0.15);
+          background: var(--accent-cyan-subtle);
           border-color: var(--accent-cyan);
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
         }
 
         .contact-form {
@@ -420,21 +421,25 @@ export default function FinaleScene({ onOpenResume }) {
         }
 
         .field-input, .field-textarea {
-          background: rgba(255, 255, 255, 0.03);
+          background: var(--bg-surface-subtle);
           border: 1px solid var(--border-hairline);
           border-radius: 6px;
           padding: 0.7rem 0.9rem;
-          color: #ffffff;
+          color: var(--text-primary);
           font-family: var(--font-sans);
           font-size: 0.92rem;
           transition: all 0.2s var(--ease-smooth);
+        }
+
+        .field-input::placeholder, .field-textarea::placeholder {
+          color: var(--text-muted);
         }
 
         .field-input:focus, .field-textarea:focus {
           outline: none;
           border-color: var(--accent-cyan);
           box-shadow: 0 0 12px var(--accent-cyan-subtle);
-          background: rgba(255, 255, 255, 0.06);
+          background: var(--bg-surface);
         }
 
         .field-textarea {
@@ -459,7 +464,7 @@ export default function FinaleScene({ onOpenResume }) {
           width: 44px;
           height: 44px;
           border-radius: 50%;
-          background: rgba(52, 211, 153, 0.15);
+          background: var(--accent-emerald-bg);
           border: 1px solid var(--accent-emerald);
           color: var(--accent-emerald);
           display: flex;
@@ -472,7 +477,7 @@ export default function FinaleScene({ onOpenResume }) {
           font-family: var(--font-display);
           font-size: 1.3rem;
           font-weight: 600;
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .success-desc {
@@ -499,7 +504,7 @@ export default function FinaleScene({ onOpenResume }) {
           font-family: var(--font-display);
           font-size: 1.15rem;
           font-weight: 700;
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         .brand-copy {
@@ -522,7 +527,7 @@ export default function FinaleScene({ onOpenResume }) {
         }
 
         .footer-links a:hover {
-          color: #ffffff;
+          color: var(--text-heading);
         }
 
         @media (max-width: 900px) {

@@ -1,9 +1,16 @@
 "use client";
 
 import { useEffect, useRef } from "react";
+import { useTheme } from "@/components/ThemeProvider";
 
 export default function CinematicAtmosphere() {
   const canvasRef = useRef(null);
+  const { theme } = useTheme();
+  const themeRef = useRef(theme);
+
+  useEffect(() => {
+    themeRef.current = theme;
+  }, [theme]);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -29,7 +36,6 @@ export default function CinematicAtmosphere() {
     window.addEventListener("resize", handleResize);
     window.addEventListener("mousemove", handleMouseMove);
 
-    // Cyan and slate engineering particles
     const PARTICLE_COUNT = 45;
     const particles = [];
     for (let i = 0; i < PARTICLE_COUNT; i++) {
@@ -44,7 +50,7 @@ export default function CinematicAtmosphere() {
         fadeSpeed: Math.random() * 0.005 + 0.002,
         wobble: Math.random() * Math.PI * 2,
         wobbleSpeed: Math.random() * 0.02 + 0.01,
-        color: Math.random() > 0.4 ? "34, 211, 238" : "148, 163, 184",
+        isAccent: Math.random() > 0.4,
       });
     }
 
@@ -54,13 +60,15 @@ export default function CinematicAtmosphere() {
       const dt = Math.min((time - lastTime) / 1000, 0.1);
       lastTime = time;
 
+      const isLight = themeRef.current === "light";
+
       const lambda = 4.0;
       mouse.x += (mouse.targetX - mouse.x) * (1 - Math.exp(-lambda * dt));
       mouse.y += (mouse.targetY - mouse.y) * (1 - Math.exp(-lambda * dt));
 
       ctx.clearRect(0, 0, width, height);
 
-      // Subtle ambient cursor spotlight
+      // Adaptive ambient cursor spotlight
       const spotlight = ctx.createRadialGradient(
         mouse.x,
         mouse.y,
@@ -69,9 +77,15 @@ export default function CinematicAtmosphere() {
         mouse.y,
         Math.max(width * 0.4, 400)
       );
-      spotlight.addColorStop(0, "rgba(34, 211, 238, 0.035)");
-      spotlight.addColorStop(0.5, "rgba(17, 19, 27, 0.015)");
-      spotlight.addColorStop(1, "transparent");
+      if (isLight) {
+        spotlight.addColorStop(0, "rgba(8, 145, 178, 0.045)");
+        spotlight.addColorStop(0.5, "rgba(148, 163, 184, 0.02)");
+        spotlight.addColorStop(1, "transparent");
+      } else {
+        spotlight.addColorStop(0, "rgba(34, 211, 238, 0.035)");
+        spotlight.addColorStop(0.5, "rgba(17, 19, 27, 0.015)");
+        spotlight.addColorStop(1, "transparent");
+      }
       ctx.fillStyle = spotlight;
       ctx.fillRect(0, 0, width, height);
 
@@ -97,11 +111,16 @@ export default function CinematicAtmosphere() {
           p.alpha = p.baseAlpha;
         }
 
+        const rgb = isLight
+          ? p.isAccent ? "8, 145, 178" : "100, 116, 139"
+          : p.isAccent ? "34, 211, 238" : "148, 163, 184";
+        const alphaScale = isLight ? 0.55 : 1;
+
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(${p.color}, ${Math.max(0, p.alpha)})`;
-        ctx.shadowBlur = p.size > 1.5 ? 8 : 4;
-        ctx.shadowColor = `rgba(${p.color}, 0.6)`;
+        ctx.fillStyle = `rgba(${rgb}, ${Math.max(0, p.alpha * alphaScale)})`;
+        ctx.shadowBlur = isLight ? 0 : p.size > 1.5 ? 8 : 4;
+        ctx.shadowColor = `rgba(${rgb}, 0.6)`;
         ctx.fill();
         ctx.shadowBlur = 0;
       }
@@ -125,7 +144,7 @@ export default function CinematicAtmosphere() {
       {/* Very faint film grain texture */}
       <div className="dynamic-film-grain" />
 
-      {/* Subtle edge vignette */}
+      {/* Adaptive edge vignette */}
       <div className="cinematic-vignette" />
 
       <style jsx>{`
@@ -151,18 +170,15 @@ export default function CinematicAtmosphere() {
           background-image: url("/tex/grain.png");
           background-repeat: repeat;
           background-size: 320px;
-          opacity: 0.025;
+          opacity: 0.022;
           mix-blend-mode: overlay;
         }
 
         .cinematic-vignette {
           position: absolute;
           inset: 0;
-          background: radial-gradient(
-            circle at 50% 50%,
-            transparent 65%,
-            rgba(9, 10, 15, 0.8) 100%
-          );
+          background: var(--vignette-bg);
+          transition: background 0.3s ease;
         }
       `}</style>
     </div>

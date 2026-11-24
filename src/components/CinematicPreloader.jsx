@@ -24,7 +24,7 @@ export default function CinematicPreloader({ onComplete }) {
       { at: 40, text: "Connecting REST API pipelines..." },
       { at: 70, text: "Optimizing SQL Server stored procedures..." },
       { at: 90, text: "Hydrating Next.js interfaces..." },
-      { at: 100, text: "System online · Obsidian & Electric Cyan architecture ready" },
+      { at: 100, text: "System online · Engineering portfolio ready" },
     ];
 
     let current = 0;
@@ -60,7 +60,7 @@ export default function CinematicPreloader({ onComplete }) {
           <span className="boot-year">MMXXVI</span>
         </div>
 
-        {/* Electric Cyan Progress Bar */}
+        {/* Cyan Progress Bar */}
         <div className="boot-bar-wrap">
           <div className="boot-bar">
             <div className="boot-fill" style={{ width: `${progress}%` }} />
@@ -83,7 +83,7 @@ export default function CinematicPreloader({ onComplete }) {
           position: fixed;
           inset: 0;
           z-index: 99999;
-          background: #090A0F;
+          background: var(--bg-canvas);
           display: flex;
           align-items: center;
           justify-content: center;
@@ -121,14 +121,14 @@ export default function CinematicPreloader({ onComplete }) {
           font-size: 2.8rem;
           font-weight: 700;
           letter-spacing: -0.02em;
-          color: #ffffff;
+          color: var(--text-heading);
           line-height: 1;
         }
 
         .boot-year {
           font-family: var(--font-mono);
           font-size: 0.72rem;
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           letter-spacing: 0.18em;
         }
 
@@ -143,7 +143,7 @@ export default function CinematicPreloader({ onComplete }) {
         .boot-bar {
           flex: 1;
           height: 2px;
-          background: rgba(255, 255, 255, 0.1);
+          background: var(--border-hairline);
           overflow: hidden;
           position: relative;
         }
@@ -176,7 +176,7 @@ export default function CinematicPreloader({ onComplete }) {
           padding: 0.55rem 1.25rem;
           background: transparent;
           border: 1px solid var(--accent-cyan);
-          color: var(--accent-cyan);
+          color: var(--accent-cyan-fg);
           font-family: var(--font-sans);
           font-size: 0.84rem;
           font-weight: 600;
@@ -187,7 +187,7 @@ export default function CinematicPreloader({ onComplete }) {
 
         .boot-enter-btn:hover {
           background: var(--accent-cyan);
-          color: #090A0F;
+          color: var(--accent-cyan-text);
           box-shadow: 0 0 20px var(--accent-cyan-glow);
         }
       `}</style>
